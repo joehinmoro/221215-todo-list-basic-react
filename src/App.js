@@ -1,9 +1,11 @@
+import Navbar from "./Navbar";
 import Random from "./Random";
 
 const App = () => {
     return (
-        <div className="container">
-            <h1>Hello World</h1>
+        <div>
+            <Navbar />
+
             <Random />
         </div>
     );
