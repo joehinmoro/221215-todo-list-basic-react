@@ -1,12 +1,12 @@
 import Navbar from "./Navbar";
-import Random from "./Random";
+import Fundamentals from "./Fundamentals";
 
 const App = () => {
     return (
         <div>
             <Navbar />
 
-            <Random />
+            <Fundamentals />
         </div>
     );
 };
