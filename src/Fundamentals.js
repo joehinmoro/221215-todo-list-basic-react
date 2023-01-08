@@ -1,13 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const Random = () => {
-    const [dummy, updateDummy] = useState([
-        { id: 1, title: "kill the haters", isCompleted: false },
-        { id: 2, title: "paint the town red", isCompleted: false },
-        { id: 3, title: "vote peter obi", isCompleted: true },
-        { id: 4, title: "stream cruel santino", isCompleted: false },
-    ]);
-
+const Fundamentals = ({ todos, handleTodosDelete }) => {
     const string = "Random component";
     const number = 69;
 
@@ -18,6 +11,11 @@ const Random = () => {
     const [value, newValue] = useState(generate());
     const [randNum, newRandNum] = useState(value);
     const [randNumStat, newRandNumStat] = useState(check(randNum));
+    let x = 1;
+    useEffect(() => {
+        console.log(`state change number ${x}`);
+        x += 1;
+    });
 
     const clickFunc = (e) => {
         newValue(generate());
@@ -48,28 +46,25 @@ const Random = () => {
                 </button>
             </div>
 
-            <ul className="list-group">
-                {dummy.map((dumm) => {
+            <div className="list-group">
+                {todos.map((todo) => {
                     return (
-                        <li
-                            key={dumm.id}
-                            className="list-group-item list-group-item-action list-group-item-dark"
+                        <button
+                            onClick={() => handleTodosDelete(todo.id)}
+                            key={todo.id}
+                            className={`list-group-item list-group-item-action ${
+                                todo.isCompleted
+                                    ? "list-group-item-danger text-decoration-line-through"
+                                    : ""
+                            }`}
                         >
-                            <input
-                                className="form-check-input me-1"
-                                type="checkbox"
-                                value={dumm.isCompleted}
-                                id={`${dumm.id}`}
-                            />
-                            <label className="form-check-label stretched-link" for={`${dumm.id}`}>
-                                {dumm.title}
-                            </label>
-                        </li>
+                            {todo.title}
+                        </button>
                     );
                 })}
-            </ul>
+            </div>
         </div>
     );
 };
 
-export default Random;
+export default Fundamentals;
