@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Fundamentals = ({ todos, handleTodosDelete }) => {
+const Random = ({ todos, handleTodosDelete }) => {
     const string = "Random component";
     const number = 69;
 
@@ -11,8 +11,8 @@ const Fundamentals = ({ todos, handleTodosDelete }) => {
     const [value, newValue] = useState(generate());
     const [randNum, newRandNum] = useState(value);
     const [randNumStat, newRandNumStat] = useState(check(randNum));
-    let x = 1;
     useEffect(() => {
+        let x = 1;
         console.log(`state change number ${x}`);
         x += 1;
     });
@@ -67,4 +67,4 @@ const Fundamentals = ({ todos, handleTodosDelete }) => {
     );
 };
 
-export default Fundamentals;
+export default Random;
