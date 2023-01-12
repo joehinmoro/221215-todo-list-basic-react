@@ -6,23 +6,30 @@ const useFetch = (url) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        const abortController = new AbortController();
         const getTodos = async () => {
             try {
-                const res = await fetch(url);
+                const res = await fetch(url, { signal: abortController.signal });
                 console.log(res);
                 if (!res.ok) throw Error("error fetching resource");
                 const data = await res.json();
                 setData(data);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
+                // if (error.name === "AbortError") console.log("abort");
                 setError(error.message);
             } finally {
                 setIsPending(false);
             }
         };
-        setTimeout(() => getTodos(), 2000);
+        setTimeout(() => {
+            getTodos();
+        }, 1000);
+
+        return () => abortController.abort();
     }, [url]);
-    return [data, isPending, error];
+    // return [data, isPending, error];
+    return { data, isPending, error };
 };
 
 export default useFetch;

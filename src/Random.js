@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Random = ({ todos, handleTodosDelete }) => {
+const Random = () => {
     const string = "Random component";
     const number = 69;
 
@@ -44,24 +44,6 @@ const Random = ({ todos, handleTodosDelete }) => {
                 <button className="btn btn-outline-light" onClick={(e) => clickFunc2("lala", e)}>
                     click me
                 </button>
-            </div>
-
-            <div className="list-group">
-                {todos.map((todo) => {
-                    return (
-                        <button
-                            onClick={() => handleTodosDelete(todo.id)}
-                            key={todo.id}
-                            className={`list-group-item list-group-item-action ${
-                                todo.isCompleted
-                                    ? "list-group-item-danger text-decoration-line-through"
-                                    : ""
-                            }`}
-                        >
-                            {todo.title}
-                        </button>
-                    );
-                })}
             </div>
         </div>
     );
