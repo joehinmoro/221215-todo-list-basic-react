@@ -15,8 +15,10 @@ const useFetch = (url) => {
                 const data = await res.json();
                 setData(data);
             } catch (error) {
-                // console.log(error);
-                // if (error.name === "AbortError") console.log("abort");
+                console.log(`${error}`);
+                console.log(`${error}\n${error.message}\n${error.name}`);
+
+                if (error.name === "AbortError") console.log("abort");
                 setError(error.message);
             } finally {
                 setIsPending(false);
@@ -29,7 +31,7 @@ const useFetch = (url) => {
         return () => abortController.abort();
     }, [url]);
     // return [data, isPending, error];
-    return { data, isPending, error };
+    return [data, isPending, error];
 };
 
 export default useFetch;

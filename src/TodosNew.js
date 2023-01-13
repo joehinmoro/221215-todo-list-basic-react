@@ -1,4 +1,4 @@
-const NewTodo = () => {
+const TodosNew = () => {
     return (
         <div className="container mt-3">
             <h2 className="text-center">New Blogs</h2>
@@ -6,4 +6,4 @@ const NewTodo = () => {
     );
 };
 
-export default NewTodo;
+export default TodosNew;

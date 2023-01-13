@@ -1,4 +1,6 @@
-const ListTodo = ({ todos, title }) => {
+import { Link } from "react-router-dom";
+
+const TodosIndexContent = ({ todos, title }) => {
     return (
         <div className="container mt-3 p-3">
             <h2 className="text-center">{title}</h2>
@@ -7,7 +9,8 @@ const ListTodo = ({ todos, title }) => {
                     <div className="list-group">
                         {todos.map((todo) => {
                             return (
-                                <button
+                                <Link
+                                    to={`/${todo.id}`}
                                     // onClick={() => handleTodosDelete(todo.id)}
                                     key={todo.id}
                                     className={`list-group-item list-group-item-action ${
@@ -17,7 +20,7 @@ const ListTodo = ({ todos, title }) => {
                                     }`}
                                 >
                                     {todo.title}
-                                </button>
+                                </Link>
                             );
                         })}
                     </div>
@@ -27,4 +30,4 @@ const ListTodo = ({ todos, title }) => {
     );
 };
 
-export default ListTodo;
+export default TodosIndexContent;

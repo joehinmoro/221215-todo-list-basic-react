@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import useFetch from "./useFetch";
-import ListTodo from "./ListTodo";
+import TodosIndexContent from "./TodosIndexContent";
 
 const Home = () => {
-    const { data: todos, isPending, error } = useFetch("http://localhost:8080/todos");
+    const [todos, isPending, error] = useFetch("http://localhost:8080/todos");
 
     useEffect(() => {
         console.log(`
@@ -16,7 +16,7 @@ error is ${Boolean(error)}`);
         <div>
             {error && <div className="container mt-5 text-center">{error}</div>}
             {isPending && <div className="container mt-5 text-center">Loading</div>}
-            {todos && <ListTodo todos={todos} title={"All Todos"} />}
+            {todos && <TodosIndexContent todos={todos} title={"All Todos"} />}
         </div>
     );
 };
