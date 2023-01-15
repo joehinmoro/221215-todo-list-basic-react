@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import TodosShowContent from "./TodosShowContent";
-import useFetch from "./useFetch";
+import useFetchGet from "./useFetchGet";
 
 const TodosShow = () => {
     const { id } = useParams();
 
-    const [todo, isPending, error] = useFetch(`http://localhost:8080/todos/${id}`);
+    const [todo, isPending, error] = useFetchGet(`http://localhost:8080/todos/${id}`);
 
     console.log(todo);
     return (

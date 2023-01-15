@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import useFetch from "./useFetch";
+import useFetchGet from "./useFetchGet";
 import TodosIndexContent from "./TodosIndexContent";
 
 const Home = () => {
-    const [todos, isPending, error] = useFetch("http://localhost:8080/todos");
+    const [todos, isPending, error] = useFetchGet("http://localhost:8080/todos");
 
     useEffect(() => {
         console.log(`

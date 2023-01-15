@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 
-const useFetch = (url) => {
+const useFetchGet = (url, options) => {
     const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const abortController = new AbortController();
-        const getTodos = async () => {
+        const fetchRequest = async () => {
             try {
-                const res = await fetch(url, { signal: abortController.signal });
+                const res = await fetch(url, { signal: abortController.signal, ...options });
+                console.log(options);
                 console.log(res);
                 if (!res.ok) throw Error("error fetching resource");
                 const data = await res.json();
@@ -25,13 +26,13 @@ const useFetch = (url) => {
             }
         };
         setTimeout(() => {
-            getTodos();
+            fetchRequest();
         }, 1000);
 
         return () => abortController.abort();
-    }, [url]);
+    }, [url, options]);
     // return [data, isPending, error];
     return [data, isPending, error];
 };
 
-export default useFetch;
+export default useFetchGet;

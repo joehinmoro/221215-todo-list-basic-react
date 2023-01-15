@@ -5,7 +5,7 @@ const TodosIndexContent = ({ todos, title }) => {
         <div className="container mt-3 p-3">
             <h2 className="text-center">{title}</h2>
             <div className="row justify-content-center mt-3">
-                <div className="col-sm-12 col-md-9 col-lg-6">
+                <div className="col-sm-12 col-md-10 col-lg-8 col-xl-6">
                     <div className="list-group">
                         {todos.map((todo) => {
                             return (
