@@ -1,8 +1,40 @@
 {
-    "todos": [
-        { "id": 1, "title": "kill the haters", "priority": "normal", "isCompleted": false },
-        { "id": 2, "title": "paint the town red", "priority": "normal", "isCompleted": false },
-        { "id": 3, "title": "vote peter obi", "priority": "normal", "isCompleted": true },
-        { "id": 4, "title": "stream cruel santino", "priority": "normal", "isCompleted": false }
-    ]
+  "todos": [
+    {
+      "id": 1,
+      "title": "kill the haters",
+      "priority": "normal",
+      "isCompleted": false
+    },
+    {
+      "id": 2,
+      "title": "paint the town red",
+      "priority": "normal",
+      "isCompleted": false
+    },
+    {
+      "id": 3,
+      "title": "vote peter obi",
+      "priority": "normal",
+      "isCompleted": true
+    },
+    {
+      "id": 4,
+      "title": "stream cruel santino",
+      "priority": "normal",
+      "isCompleted": false
+    },
+    {
+      "title": "frgg",
+      "priority": "normal",
+      "isCompleted": false,
+      "id": 5
+    },
+    {
+      "title": "svb",
+      "priority": "normal",
+      "isCompleted": false,
+      "id": 6
+    }
+  ]
 }

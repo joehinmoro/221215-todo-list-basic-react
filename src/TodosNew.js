@@ -1,26 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useFetchPost from "./useFetchPost";
 
 const TodosNew = () => {
     const [title, setTitle] = useState("");
     const [priority, setPriority] = useState("normal");
-    const handleSubmit = (e) => {
+
+    const [isPending, setIsPending] = useState(false);
+    const [error, setError] = useState(null);
+
+    const HandleSubmit = async (e) => {
         // prevent default submit behaviour
         e.preventDefault();
         // console.log(e, e.target, e.target.priority.value);
         // create newTodo object
-        const newTodo = {
-            title,
-            priority,
-            isCompleted: false,
-        };
-
-        console.log(newTodo);
+        setIsPending(true);
+        const res = await fetch("http://localhost:8080/todos", {
+            method: "POST",
+            body: JSON.stringify({
+                title,
+                priority,
+                isCompleted: false,
+            }),
+            headers: { "Content-Type": "application/json" },
+        });
+        setIsPending(false);
+        // setTimeout(()=>{},1000)
+        console.log(res);
     };
 
     return (
         <div className="container ">
             <h2 className="text-center">New Todo</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={HandleSubmit}>
                 <div className="row justify-content-center mt-3">
                     <div className="col-sm-12 col-md-10 col-lg-8 col-xl-6">
                         {/* <div className="container"> */}
@@ -65,9 +76,19 @@ const TodosNew = () => {
                             </div>
                             <div className="col-sm-12 col-md-4">
                                 <div className="d-grid gap-2">
-                                    <button className="btn btn-block btn-outline-light h-100">
-                                        Create Todo
-                                    </button>
+                                    {!isPending && (
+                                        <button className="btn btn-block btn-outline-light h-100">
+                                            Create Todo
+                                        </button>
+                                    )}
+                                    {isPending && (
+                                        <button
+                                            className="btn btn-block btn-outline-light h-100"
+                                            disabled
+                                        >
+                                            Creating Todo
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>
