@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const useFetchPost = (url, payload, options) => {
-    const [data, setData] = useState(null);
+const useFetchPost = (url, payload) => {
+    const [success, setSuccess] = useState(false);
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(null);
 
@@ -9,17 +9,18 @@ const useFetchPost = (url, payload, options) => {
         // define func
         const handleFetch = async () => {
             try {
+                setError(null);
                 setIsPending(true);
                 const res = await fetch(url, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
-                    ...options,
                 });
                 if (!res.ok) throw Error("Error Posting Data");
-                setData(res);
+                setSuccess(true);
             } catch (error) {
                 setError(error.name);
+                setSuccess(false);
             } finally {
                 setIsPending(false);
             }
@@ -27,10 +28,10 @@ const useFetchPost = (url, payload, options) => {
         // simulate func
         setTimeout(() => {
             handleFetch();
-        }, 1000);
-    }, [url, payload, options]);
+        }, 2000);
+    }, [url, payload]);
 
-    return [data, isPending, error];
+    return [success, isPending, error];
 };
 
 export default useFetchPost;
