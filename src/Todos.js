@@ -8,7 +8,7 @@ import ShowTodo from "./TodosShow";
 const Todos = () => {
     return (
         <Router>
-            <div className="container-fluid">
+            <div className="">
                 <Navbar />
                 <div className="content">
                     <Switch>
@@ -21,7 +21,7 @@ const Todos = () => {
                         <Route path="/random">
                             <Random />
                         </Route>
-                        <Route path="/:id">
+                        <Route path="/:id" exact>
                             <ShowTodo />
                         </Route>
                     </Switch>

@@ -32,7 +32,7 @@ const TodosNew = () => {
                                         type="text"
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
-                                        className="form-control"
+                                        className="form-control text-capitalize"
                                         id="title"
                                         placeholder="Title"
                                     />
