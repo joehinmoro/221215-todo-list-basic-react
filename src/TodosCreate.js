@@ -2,28 +2,20 @@ import { useEffect } from "react";
 
 import useFetchPost from "./useFetchPost";
 
-const TodosCreate = ({ payload, setPayload, setTitle, setPriority, setError }) => {
-    const [success, isPending, error] = useFetchPost("http://localhost:8080/todos", payload);
+const TodosCreate = ({ payload, setIsPending, setError, setSuccess }) => {
+    const [isPending, error, success] = useFetchPost("http://localhost:8080/todos", payload);
+
     useEffect(() => {
+        console.log(
+            "TodoCreate: ",
+            "\nerror is " + error + "\nisPending " + isPending + "\nsuccess " + success
+        );
+        setIsPending(isPending);
         setError(error);
-    }, [error]);
+        setSuccess(success);
+    }, [isPending, error, success, setIsPending, setError, setSuccess]);
 
-    useEffect(() => {
-        console.log(success);
-        if (success === true) {
-            setPayload(null);
-            // reset todos form
-            setTitle("");
-            setPriority("normal");
-        }
-    }, [success]);
-
-    return (
-        <div className="d-grid gap-2">
-            {/* {!error && <TodosCreateButton disabled innerText={"Creating Todo"} />} */}
-            {/* {error && <TodosCreateButton innerText={"Error. Try Again"} />} */}
-        </div>
-    );
+    return "";
 };
 
 export default TodosCreate;

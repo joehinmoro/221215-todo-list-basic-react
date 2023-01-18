@@ -31,7 +31,7 @@ const useFetchPost = (url, payload) => {
         }, 2000);
     }, [url, payload]);
 
-    return [success, isPending, error];
+    return [isPending, error, success];
 };
 
 export default useFetchPost;
