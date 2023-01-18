@@ -6,11 +6,11 @@ const useFetchPost = (url, payload) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        setError(null);
+        setIsPending(true);
         // define func
         const handleFetch = async () => {
             try {
-                setError(null);
-                setIsPending(true);
                 const res = await fetch(url, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

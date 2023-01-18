@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import TodosCreateButton from "./TodosCreateButton";
+
 import useFetchPost from "./useFetchPost";
 
-const TodosCreate = ({ payload, setPayload, setTitle, setPriority }) => {
+const TodosCreate = ({ payload, setPayload, setTitle, setPriority, setError }) => {
     const [success, isPending, error] = useFetchPost("http://localhost:8080/todos", payload);
+    useEffect(() => {
+        setError(error);
+    }, [error]);
 
     useEffect(() => {
         console.log(success);
@@ -17,8 +20,8 @@ const TodosCreate = ({ payload, setPayload, setTitle, setPriority }) => {
 
     return (
         <div className="d-grid gap-2">
-            {!error && <TodosCreateButton disabled innerText={"Creating Todo"} />}
-            {error && <TodosCreateButton innerText={"Error. Try Again"} />}
+            {/* {!error && <TodosCreateButton disabled innerText={"Creating Todo"} />} */}
+            {/* {error && <TodosCreateButton innerText={"Error. Try Again"} />} */}
         </div>
     );
 };

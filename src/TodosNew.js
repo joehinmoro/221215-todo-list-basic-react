@@ -1,10 +1,12 @@
 import { useState } from "react";
 import TodosCreate from "./TodosCreate";
+import TodosFormButton from "./TodosFormButton";
 
 const TodosNew = () => {
     const [title, setTitle] = useState("");
     const [priority, setPriority] = useState("normal");
     const [payload, setPayload] = useState(null);
+    const [error, setError] = useState(null);
 
     const HandleSubmit = async (e) => {
         // prevent default submit behaviour
@@ -63,17 +65,22 @@ const TodosNew = () => {
                             </div>
                             <div className="col-sm-12 col-md-4">
                                 <div className="d-grid gap-2">
-                                    {!payload && (
-                                        <button className="btn btn-block btn-outline-light h-100">
-                                            Create Todo
-                                        </button>
+                                    {!payload && !error && <TodosFormButton innerText={"Create"} />}
+                                    {payload && !error && (
+                                        <TodosFormButton
+                                            innerText={"Creating..."}
+                                            disabled={true}
+                                        />
                                     )}
+                                    {error && <TodosFormButton innerText={"Error. Try Again"} />}
+
                                     {payload && (
                                         <TodosCreate
                                             payload={payload}
                                             setPayload={setPayload}
                                             setTitle={setTitle}
                                             setPriority={setPriority}
+                                            setError={setError}
                                         />
                                     )}
                                 </div>
