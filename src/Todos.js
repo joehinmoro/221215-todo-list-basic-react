@@ -4,6 +4,7 @@ import Home from "./TodosIndex";
 import Random from "./Random";
 import NewTodo from "./TodosNew";
 import ShowTodo from "./TodosShow";
+import TodosEdit from "./TodosEdit";
 
 const Todos = () => {
     return (
@@ -23,6 +24,9 @@ const Todos = () => {
                         </Route>
                         <Route path="/:id" exact>
                             <ShowTodo />
+                        </Route>
+                        <Route path="/:id/edit" exact>
+                            <TodosEdit />
                         </Route>
                     </Switch>
                 </div>

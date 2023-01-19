@@ -11,19 +11,6 @@ const TodosNew = () => {
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(null);
 
-    const handleSubmit = async (e) => {
-        // prevent default submit behaviour
-
-        e.preventDefault();
-        // validate todo title then create request body
-        if (title)
-            setPayload({
-                title,
-                priority,
-                isCompleted: false,
-            });
-    };
-
     useEffect(() => {
         if (success) {
             console.log("i am herer");
@@ -44,10 +31,8 @@ const TodosNew = () => {
                 priority={priority}
                 setPriority={setPriority}
                 isPending={isPending}
-                setIsPending={setIsPending}
                 error={error}
-                setError={setError}
-                handleSubmit={handleSubmit}
+                setPayload={setPayload}
             />
             {payload && (
                 <TodosCreate

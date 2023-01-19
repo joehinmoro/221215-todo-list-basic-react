@@ -5,7 +5,7 @@ import useFetchGet from "./useFetchGet";
 const TodosShow = () => {
     const { id } = useParams();
 
-    const [todo, isPending, error] = useFetchGet(`http://localhost:8080/todos/${id}`);
+    const [isPending, error, todo] = useFetchGet(`http://localhost:8080/todos/${id}`);
 
     console.log(todo);
     return (

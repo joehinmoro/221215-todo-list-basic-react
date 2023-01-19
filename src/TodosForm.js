@@ -7,8 +7,22 @@ const TodosForm = ({
     setPriority,
     isPending,
     error,
-    handleSubmit,
+    setPayload,
 }) => {
+    // handle form submit
+    const handleSubmit = async (e) => {
+        // prevent default submit behaviour
+
+        e.preventDefault();
+        // validate todo title then create request body
+        if (title)
+            setPayload({
+                title,
+                priority,
+                isCompleted: false,
+            });
+    };
+
     return (
         <div className="container">
             <h2 className="text-center">{header}</h2>

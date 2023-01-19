@@ -4,8 +4,6 @@ const TodosShowContent = ({ todo }) => {
     const colorMode = todo.isCompleted ? "danger" : "light";
     console.log(todo);
 
-    const editTodoFull = () => {};
-
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
@@ -26,7 +24,7 @@ const TodosShowContent = ({ todo }) => {
                                 {todo.isCompleted ? "Undo" : "Done"}
                             </button>
                             <Link
-                                to={`/todos/${todo.id}/edit`}
+                                to={`/${todo.id}/edit`}
                                 className={`btn btn-outline-${colorMode}`}
                             >
                                 Edit

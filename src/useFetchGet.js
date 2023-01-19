@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
 const useFetchGet = (url, options) => {
-    const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -32,7 +32,7 @@ const useFetchGet = (url, options) => {
         return () => abortController.abort();
     }, [url, options]);
     // return [data, isPending, error];
-    return [data, isPending, error];
+    return [isPending, error, data];
 };
 
 export default useFetchGet;
