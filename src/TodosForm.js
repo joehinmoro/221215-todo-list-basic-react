@@ -7,7 +7,8 @@ const TodosForm = ({
     setPriority,
     isPending,
     error,
-    setPayload,
+    setFormSubmitData,
+    disableSubmit,
 }) => {
     // handle form submit
     const handleSubmit = async (e) => {
@@ -16,10 +17,9 @@ const TodosForm = ({
         e.preventDefault();
         // validate todo title then create request body
         if (title)
-            setPayload({
+            setFormSubmitData({
                 title,
                 priority,
-                isCompleted: false,
             });
     };
 
@@ -68,7 +68,10 @@ const TodosForm = ({
                             <div className="col-sm-12 col-md-4">
                                 <div className="d-grid gap-2">
                                     {!isPending && !error && (
-                                        <TodosFormButton innerText={"Create"} />
+                                        <TodosFormButton
+                                            innerText={"Create"}
+                                            disabled={disableSubmit}
+                                        />
                                     )}
                                     {isPending && !error && (
                                         <TodosFormButton
@@ -76,7 +79,12 @@ const TodosForm = ({
                                             disabled={true}
                                         />
                                     )}
-                                    {error && <TodosFormButton innerText={"Error. Try Again"} />}
+                                    {error && (
+                                        <TodosFormButton
+                                            innerText={"Error. Try Again"}
+                                            disabled={disableSubmit}
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </div>

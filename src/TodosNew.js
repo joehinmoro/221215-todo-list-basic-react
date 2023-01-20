@@ -10,6 +10,20 @@ const TodosNew = () => {
     const [success, setSuccess] = useState(false);
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(null);
+    const [disableSubmit, setDisableSubmit] = useState(true);
+    const [formSubmitData, setFormSubmitData] = useState(null);
+
+    useEffect(() => {
+        if (title) setDisableSubmit(false);
+        if (!title) setDisableSubmit(true);
+    }, [title]);
+
+    useEffect(() => {
+        if (formSubmitData) {
+            setPayload({ ...formSubmitData, isCompleted: false });
+            console.log(payload);
+        }
+    }, [formSubmitData]);
 
     useEffect(() => {
         if (success) {
@@ -18,6 +32,7 @@ const TodosNew = () => {
             // reset todos form
             setTitle("");
             setPriority("normal");
+            setFormSubmitData(null);
             setSuccess(false);
         }
     }, [success]);
@@ -32,7 +47,8 @@ const TodosNew = () => {
                 setPriority={setPriority}
                 isPending={isPending}
                 error={error}
-                setPayload={setPayload}
+                setFormSubmitData={setFormSubmitData}
+                disableSubmit={disableSubmit}
             />
             {payload && (
                 <TodosCreate
