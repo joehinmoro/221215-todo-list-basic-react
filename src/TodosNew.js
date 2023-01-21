@@ -1,35 +1,49 @@
 import { useEffect, useState } from "react";
-
 import TodosForm from "./TodosForm";
 import TodosCreate from "./TodosCreate";
 
 const TodosNew = () => {
+    // Define State
     const [title, setTitle] = useState("");
     const [priority, setPriority] = useState("normal");
     const [payload, setPayload] = useState(null);
     const [success, setSuccess] = useState(false);
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(null);
-    const [disableSubmit, setDisableSubmit] = useState(true);
+    const [disableSubmitButton, setDisableSubmitButton] = useState(true);
+    const [submitButtonText, setSubmitButtonText] = useState("Create");
     const [formSubmitData, setFormSubmitData] = useState(null);
 
+    // disable or enable form submit button if (title)
     useEffect(() => {
-        if (title) setDisableSubmit(false);
-        if (!title) setDisableSubmit(true);
+        title && setDisableSubmitButton(false);
+        !title && setDisableSubmitButton(true);
     }, [title]);
 
+    // set form submit button text based on create request status
+    useEffect(() => {
+        !isPending && !error && setSubmitButtonText("Create");
+        if (isPending) {
+            setSubmitButtonText("Creating");
+            setDisableSubmitButton(true);
+        }
+        if (!isPending && error) {
+            setSubmitButtonText("Error. Try Again");
+            setDisableSubmitButton(false);
+        }
+    }, [isPending, error]);
+
+    // set payload to be created
     useEffect(() => {
         if (formSubmitData) {
             setPayload({ ...formSubmitData, isCompleted: false });
-            console.log(payload);
         }
     }, [formSubmitData]);
 
+    // if request success, reset payload, success status and form fields for next new todo
     useEffect(() => {
         if (success) {
-            console.log("i am herer");
             setPayload(null);
-            // reset todos form
             setTitle("");
             setPriority("normal");
             setFormSubmitData(null);
@@ -39,17 +53,18 @@ const TodosNew = () => {
 
     return (
         <div>
+            {/* mount todo input form component */}
             <TodosForm
                 header={"New Form"}
                 title={title}
                 setTitle={setTitle}
                 priority={priority}
                 setPriority={setPriority}
-                isPending={isPending}
-                error={error}
                 setFormSubmitData={setFormSubmitData}
-                disableSubmit={disableSubmit}
+                disableSubmitButton={disableSubmitButton}
+                submitButtonText={submitButtonText}
             />
+            {/* if payload is set mount create todo component */}
             {payload && (
                 <TodosCreate
                     payload={payload}

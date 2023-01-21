@@ -1,14 +1,13 @@
-import TodosFormButton from "./TodosFormButton";
 const TodosForm = ({
     header,
     title,
     setTitle,
     priority,
     setPriority,
-    isPending,
-    error,
+
     setFormSubmitData,
-    disableSubmit,
+    disableSubmitButton,
+    submitButtonText,
 }) => {
     // handle form submit
     const handleSubmit = async (e) => {
@@ -67,24 +66,12 @@ const TodosForm = ({
                             </div>
                             <div className="col-sm-12 col-md-4">
                                 <div className="d-grid gap-2">
-                                    {!isPending && !error && (
-                                        <TodosFormButton
-                                            innerText={"Create"}
-                                            disabled={disableSubmit}
-                                        />
-                                    )}
-                                    {isPending && !error && (
-                                        <TodosFormButton
-                                            innerText={"Creating..."}
-                                            disabled={true}
-                                        />
-                                    )}
-                                    {error && (
-                                        <TodosFormButton
-                                            innerText={"Error. Try Again"}
-                                            disabled={disableSubmit}
-                                        />
-                                    )}
+                                    <button
+                                        className="btn btn-block btn-outline-light h-100"
+                                        disabled={disableSubmitButton}
+                                    >
+                                        {submitButtonText}
+                                    </button>
                                 </div>
                             </div>
                         </div>

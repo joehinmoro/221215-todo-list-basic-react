@@ -10,7 +10,9 @@ const TodosEdit = () => {
     const [success, setSuccess] = useState(false);
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(null);
-    const [disableSubmit, setDisableSubmit] = useState(true);
+    const [disableSubmitButton, setDisableSubmitButton] = useState(true);
+    const [submitButtonText, setSubmitButtonText] = useState("Update");
+    const [formSubmitData, setFormSubmitData] = useState(null);
 
     // extract todo id from url params
     const { id } = useParams();
@@ -27,15 +29,54 @@ const TodosEdit = () => {
     // handle edit form submit button disabled status (mitigating redundant update request)
     useEffect(() => {
         if (todo) {
-            if (todo.title === title && todo.priority === priority) setDisableSubmit(true);
-            if (todo.title !== title || todo.priority !== priority) setDisableSubmit(false);
+            if (todo.title === title && todo.priority === priority) setDisableSubmitButton(true);
+            if (todo.title !== title || todo.priority !== priority) setDisableSubmitButton(false);
         }
-    }, [title, priority]);
+    }, [todo, title, priority]);
+
+    // set form submit button text based on update request status
+    useEffect(() => {
+        // !isPending && !error && setSubmitButtonText("Update");
+        if (isPending) {
+            setSubmitButtonText("Updating");
+            setDisableSubmitButton(true);
+            console.log("lulul");
+        }
+
+        if (error && !isPending) {
+            setSubmitButtonText("Error. Try Again");
+            setDisableSubmitButton(false);
+        }
+    }, [isPending, error]);
 
     //
     useEffect(() => {
-        if (payload) console.log(payload);
-    }, [payload]);
+        if (formSubmitData) {
+            console.log("lol");
+            setTimeout(() => {
+                setIsPending(true);
+                const rand = Math.floor(Math.random() * 2);
+                if (rand === 0) {
+                    setSuccess(true);
+                    setError(false);
+                } else {
+                    setSuccess(false);
+                    setError(true);
+                }
+                setIsPending(false);
+            }, 2000);
+        }
+    }, [formSubmitData]);
+
+    useEffect(() => {
+        if (success) {
+            setPayload(null);
+            setTitle("");
+            setPriority("normal");
+            setFormSubmitData(null);
+            setSuccess(false);
+        }
+    }, [success]);
 
     return (
         <div className="container">
@@ -53,7 +94,9 @@ const TodosEdit = () => {
                     setIsPending={setIsPending}
                     error={error}
                     setError={setError}
-                    disableSubmit={disableSubmit}
+                    setFormSubmitData={setFormSubmitData}
+                    disableSubmitButton={disableSubmitButton}
+                    submitButtonText={submitButtonText}
                 />
             )}
         </div>
