@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import TodosForm from "./TodosForm";
+import TodosUpdate from "./TodosUpdate";
 import useFetchGet from "./useFetchGet";
 
 const TodosEdit = () => {
@@ -13,12 +14,13 @@ const TodosEdit = () => {
     const [disableSubmitButton, setDisableSubmitButton] = useState(true);
     const [submitButtonText, setSubmitButtonText] = useState("Update");
     const [formSubmitData, setFormSubmitData] = useState(null);
+    const history = useHistory();
 
     // extract todo id from url params
     const { id } = useParams();
     // fetch todo record using params
     const [isPendingGET, errorGET, todo] = useFetchGet(`http://localhost:8080/todos/${id}`);
-    //    set update form fields to current todos data
+    // set update form fields to current todos data
     useEffect(() => {
         if (todo) {
             setTitle(todo.title);
@@ -29,21 +31,21 @@ const TodosEdit = () => {
     // handle edit form submit button disabled status (mitigating redundant update request)
     useEffect(() => {
         if (todo) {
-            if (todo.title === title && todo.priority === priority) setDisableSubmitButton(true);
-            if (todo.title !== title || todo.priority !== priority) setDisableSubmitButton(false);
+            // if (todo.title === title && todo.priority === priority) setDisableSubmitButton(true);
+            // if (todo.title !== title || todo.priority !== priority) setDisableSubmitButton(false);
+            todo.title === title && todo.priority === priority && setDisableSubmitButton(true);
+            (todo.title !== title || todo.priority !== priority) && setDisableSubmitButton(false);
         }
     }, [todo, title, priority]);
 
     // set form submit button text based on update request status
     useEffect(() => {
-        // !isPending && !error && setSubmitButtonText("Update");
+        !isPending && !error && setSubmitButtonText("Update");
         if (isPending) {
             setSubmitButtonText("Updating");
             setDisableSubmitButton(true);
-            console.log("lulul");
         }
-
-        if (error && !isPending) {
+        if (!isPending && error) {
             setSubmitButtonText("Error. Try Again");
             setDisableSubmitButton(false);
         }
@@ -52,29 +54,21 @@ const TodosEdit = () => {
     //
     useEffect(() => {
         if (formSubmitData) {
-            console.log("lol");
-            setTimeout(() => {
-                setIsPending(true);
-                const rand = Math.floor(Math.random() * 2);
-                if (rand === 0) {
-                    setSuccess(true);
-                    setError(false);
-                } else {
-                    setSuccess(false);
-                    setError(true);
-                }
-                setIsPending(false);
-            }, 2000);
+            const payload = {};
+            if (title !== todo.title) payload.title = title;
+            if (priority !== todo.priority) payload.priority = priority;
+            console.log(payload);
+            setPayload(payload);
         }
     }, [formSubmitData]);
 
+    // if update request is successful
     useEffect(() => {
         if (success) {
+            // unload payload
             setPayload(null);
-            setTitle("");
-            setPriority("normal");
-            setFormSubmitData(null);
-            setSuccess(false);
+            // redirect to show route
+            history.push(`/${id}`);
         }
     }, [success]);
 
@@ -97,6 +91,15 @@ const TodosEdit = () => {
                     setFormSubmitData={setFormSubmitData}
                     disableSubmitButton={disableSubmitButton}
                     submitButtonText={submitButtonText}
+                />
+            )}
+            {payload && (
+                <TodosUpdate
+                    payload={payload}
+                    setIsPending={setIsPending}
+                    setError={setError}
+                    setSuccess={setSuccess}
+                    id={id}
                 />
             )}
         </div>

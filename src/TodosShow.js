@@ -7,7 +7,6 @@ const TodosShow = () => {
 
     const [isPending, error, todo] = useFetchGet(`http://localhost:8080/todos/${id}`);
 
-    console.log(todo);
     return (
         <div className="container">
             {isPending && <h4>loading</h4>}

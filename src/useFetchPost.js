@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useFetchPost = (url, payload) => {
+const useFetchPost = (url, payload, method) => {
     const [success, setSuccess] = useState(false);
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(null);
@@ -12,7 +12,7 @@ const useFetchPost = (url, payload) => {
         const handleFetch = async () => {
             try {
                 const res = await fetch(url, {
-                    method: "POST",
+                    method,
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
                 });
@@ -28,8 +28,8 @@ const useFetchPost = (url, payload) => {
         // simulate func
         setTimeout(() => {
             handleFetch();
-        }, 2000);
-    }, [url, payload]);
+        }, 1000);
+    }, [url, payload, method]);
 
     return [isPending, error, success];
 };
