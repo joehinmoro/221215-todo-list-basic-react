@@ -1,6 +1,6 @@
 import Navbar from "./Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./TodosIndex";
+import TodosIndex from "./TodosIndex";
 import Random from "./Random";
 import NewTodo from "./TodosNew";
 import ShowTodo from "./TodosShow";
@@ -14,7 +14,7 @@ const Todos = () => {
                 <div className="content">
                     <Switch>
                         <Route path="/" exact>
-                            <Home />
+                            <TodosIndex />
                         </Route>
                         <Route path="/new">
                             <NewTodo />

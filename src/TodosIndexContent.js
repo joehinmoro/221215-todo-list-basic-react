@@ -19,7 +19,17 @@ const TodosIndexContent = ({ todos, title }) => {
                                             : ""
                                     }`}
                                 >
-                                    {todo.title}
+                                    <div className="d-flex justify-content-between">
+                                        {todo.title}
+                                        <div className="d-flex justify-content-between ms-auto">
+                                            <button className="btn btn-outline-light btn-sm">
+                                                hhh
+                                            </button>
+                                            <button className="btn btn-outline-light btn-sm">
+                                                hhh
+                                            </button>
+                                        </div>
+                                    </div>
                                 </Link>
                             );
                         })}

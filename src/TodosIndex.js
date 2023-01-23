@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useFetchGet from "./useFetchGet";
 import TodosIndexContent from "./TodosIndexContent";
 
-const Home = () => {
+const TodosIndex = () => {
     const [isPending, error, todos] = useFetchGet("http://localhost:8080/todos");
 
     useEffect(() => {
@@ -21,4 +21,4 @@ error is ${Boolean(error)}`);
     );
 };
 
-export default Home;
+export default TodosIndex;
