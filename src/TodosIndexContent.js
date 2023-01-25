@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const TodosIndexContent = ({ todos, title }) => {
+const TodosIndexContent = ({ todos, title, handleDelete }) => {
     return (
         <div className="container mt-3 p-3">
             <h2 className="text-center">{title}</h2>
@@ -25,8 +25,11 @@ const TodosIndexContent = ({ todos, title }) => {
                                             <button className="btn btn-outline-light btn-sm">
                                                 hhh
                                             </button>
-                                            <button className="btn btn-outline-light btn-sm">
-                                                hhh
+                                            <button
+                                                onClick={(e) => handleDelete(todo.id, e)}
+                                                className="btn btn-outline-light btn-sm"
+                                            >
+                                                delete
                                             </button>
                                         </div>
                                     </div>

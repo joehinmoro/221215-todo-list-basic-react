@@ -28,7 +28,7 @@ const useFetchPost = (url, payload, method) => {
         // simulate func
         setTimeout(() => {
             handleFetch();
-        }, 1000);
+        }, 500);
     }, [url, payload, method]);
 
     return [isPending, error, success];

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const TodosShowContent = ({ todo }) => {
+const TodosShowContent = ({ todo, handleDelete }) => {
     const colorMode = todo.isCompleted ? "danger" : "light";
     console.log(todo);
 
@@ -29,7 +29,12 @@ const TodosShowContent = ({ todo }) => {
                             >
                                 Edit
                             </Link>
-                            <button className={`btn btn-outline-${colorMode}`}>Delete</button>
+                            <button
+                                onClick={(e) => handleDelete(todo.id)}
+                                className={`btn btn-outline-${colorMode}`}
+                            >
+                                Delete
+                            </button>
                         </div>
                     </div>
                 </div>
