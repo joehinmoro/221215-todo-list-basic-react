@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const TodosIndexContent = ({ todos, title, handleDelete }) => {
+const TodosIndexContent = ({ todos, title, handleDelete, handleStatus }) => {
     return (
         <div className="container mt-3 p-3">
             <h2 className="text-center">{title}</h2>
@@ -22,11 +22,25 @@ const TodosIndexContent = ({ todos, title, handleDelete }) => {
                                     <div className="d-flex justify-content-between">
                                         {todo.title}
                                         <div className="d-flex justify-content-between ms-auto">
-                                            <button className="btn btn-outline-light btn-sm">
-                                                hhh
+                                            <button
+                                                onClick={async (e) => {
+                                                    e.preventDefault();
+                                                    const status = await handleStatus(
+                                                        todo.id,
+                                                        todo.isCompleted
+                                                    );
+                                                    console.log(status);
+                                                }}
+                                                className="btn btn-outline-light btn-sm"
+                                            >
+                                                {todo.isCompleted ? "Undo" : "Done"}
                                             </button>
                                             <button
-                                                onClick={(e) => handleDelete(todo.id, e)}
+                                                onClick={(e) => {
+                                                    handleDelete(todo.id);
+                                                    // e.stopPropagation();
+                                                    e.preventDefault();
+                                                }}
                                                 className="btn btn-outline-light btn-sm"
                                             >
                                                 delete
