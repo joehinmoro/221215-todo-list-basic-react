@@ -1,3 +1,16 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "title": "finish this project",
+      "priority": "normal",
+      "isCompleted": false,
+      "id": 1
+    },
+    {
+      "title": "Start next project",
+      "priority": "normal",
+      "isCompleted": false,
+      "id": 2
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const TodosShowContent = ({ todo, handleDelete }) => {
+const TodosShowContent = ({ todo, handleDelete, handleStatus }) => {
     const colorMode = todo.isCompleted ? "danger" : "light";
     console.log(todo);
 
@@ -10,9 +10,10 @@ const TodosShowContent = ({ todo, handleDelete }) => {
                 <div className="col-sm-12 col-md-9 col-lg-6 col-xl-5">
                     <div className={`card border-${colorMode} mb-3`}>
                         <div
-                            className={`card-header   border-${colorMode}-subtle text-capitalize bg-dark-subtle text-${colorMode}`}
+                            className={`card-header d-flex justify-content-between border-${colorMode}-subtle text-capitalize bg-dark-subtle text-${colorMode}`}
                         >
-                            {todo.priority}
+                            <span>{todo.priority}</span>
+                            <span>{todo.isCompleted ? "Completed" : "Pending"}</span>
                         </div>
                         <div className="card-body bg-dark-subtle">
                             <h5 className={`card-title text-${colorMode}`}>{todo.title}</h5>
@@ -20,7 +21,10 @@ const TodosShowContent = ({ todo, handleDelete }) => {
                         <div
                             className={`card-footer border-${colorMode}-subtle bg-dark-subtle d-flex  justify-content-around`}
                         >
-                            <button className={`btn btn-outline-${colorMode}`}>
+                            <button
+                                onClick={(e) => handleStatus(todo.id, todo.isCompleted)}
+                                className={`btn btn-outline-${colorMode}`}
+                            >
                                 {todo.isCompleted ? "Undo" : "Done"}
                             </button>
                             <Link

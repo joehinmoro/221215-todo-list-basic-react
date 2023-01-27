@@ -4,7 +4,7 @@ const TodosForm = ({
     setTitle,
     priority,
     setPriority,
-
+    isPending,
     setFormSubmitData,
     disableSubmitButton,
     submitButtonText,
@@ -23,7 +23,7 @@ const TodosForm = ({
     };
 
     return (
-        <div className="container">
+        <div className="container mt-5">
             <h2 className="text-center">{header}</h2>
             <form onSubmit={handleSubmit}>
                 <div className="row justify-content-center mt-3">
@@ -35,7 +35,7 @@ const TodosForm = ({
                                         type="text"
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
-                                        className="form-control text-capitalize"
+                                        className="form-control"
                                         id="title"
                                         placeholder="Title"
                                     />
@@ -70,7 +70,14 @@ const TodosForm = ({
                                         className="btn btn-block btn-outline-light h-100"
                                         disabled={disableSubmitButton}
                                     >
-                                        {submitButtonText}
+                                        {isPending && (
+                                            <span
+                                                class="spinner-border spinner-border-sm me-2"
+                                                role="status"
+                                                aria-hidden="true"
+                                            ></span>
+                                        )}
+                                        <span>{submitButtonText}</span>
                                     </button>
                                 </div>
                             </div>

@@ -27,7 +27,7 @@ const useFetchGet = (url, options) => {
         };
         setTimeout(() => {
             fetchRequest();
-        }, 1);
+        }, 500);
 
         return () => abortController.abort();
     }, [url, options]);

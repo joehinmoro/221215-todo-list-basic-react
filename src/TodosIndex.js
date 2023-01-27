@@ -1,6 +1,8 @@
 import useFetchGet from "./useFetchGet";
 import TodosIndexContent from "./TodosIndexContent";
 import { useEffect, useState } from "react";
+import Loading from "./Loading";
+import Error from "./Error";
 
 const TodosIndex = () => {
     const [todos, setTodos] = useState(null);
@@ -41,7 +43,6 @@ const TodosIndex = () => {
 
             todos[todos.indexOf(todos.find(({ id }) => id === _id))].isCompleted = !isCompleted;
             setTodos([...todos]);
-            // return idx;
         } catch (error) {
             console.log(error.message, error.name);
             alert(error.message, error.name);
@@ -50,8 +51,8 @@ const TodosIndex = () => {
 
     return (
         <div>
-            {error && <div className="container mt-5 text-center">{error}</div>}
-            {isPending && <div className="container mt-5 text-center">Loading</div>}
+            {error && <Error error={error} />}
+            {isPending && <Loading />}
             {todos && (
                 <TodosIndexContent
                     todos={todos}

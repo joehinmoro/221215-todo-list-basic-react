@@ -14,14 +14,18 @@ const TodosIndexContent = ({ todos, title, handleDelete, handleStatus }) => {
                                     // onClick={() => handleTodosDelete(todo.id)}
                                     key={todo.id}
                                     className={`list-group-item list-group-item-action ${
-                                        todo.isCompleted
-                                            ? "list-group-item-danger text-decoration-line-through"
-                                            : ""
+                                        todo.isCompleted && "list-group-item-danger"
                                     }`}
                                 >
                                     <div className="d-flex justify-content-between">
-                                        {todo.title}
-                                        <div className="d-flex justify-content-between ms-auto">
+                                        <span
+                                            className={`${
+                                                todo.isCompleted && "text-decoration-line-through"
+                                            }`}
+                                        >
+                                            {todo.title}
+                                        </span>
+                                        <div className="w-25 d-flex justify-content-between ">
                                             <button
                                                 onClick={async (e) => {
                                                     e.preventDefault();
@@ -31,7 +35,7 @@ const TodosIndexContent = ({ todos, title, handleDelete, handleStatus }) => {
                                                     );
                                                     console.log(status);
                                                 }}
-                                                className="btn btn-outline-light btn-sm"
+                                                className="btn btn-outline-light btn-sm "
                                             >
                                                 {todo.isCompleted ? "Undo" : "Done"}
                                             </button>
@@ -41,9 +45,9 @@ const TodosIndexContent = ({ todos, title, handleDelete, handleStatus }) => {
                                                     // e.stopPropagation();
                                                     e.preventDefault();
                                                 }}
-                                                className="btn btn-outline-light btn-sm"
+                                                className="btn btn-outline-danger btn-sm "
                                             >
-                                                delete
+                                                Delete
                                             </button>
                                         </div>
                                     </div>

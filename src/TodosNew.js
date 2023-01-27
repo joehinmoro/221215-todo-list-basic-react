@@ -63,6 +63,7 @@ const TodosNew = () => {
                 setFormSubmitData={setFormSubmitData}
                 disableSubmitButton={disableSubmitButton}
                 submitButtonText={submitButtonText}
+                isPending={isPending}
             />
             {/* if payload is set mount create todo component */}
             {payload && (

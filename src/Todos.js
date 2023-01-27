@@ -5,6 +5,7 @@ import Random from "./Random";
 import NewTodo from "./TodosNew";
 import ShowTodo from "./TodosShow";
 import TodosEdit from "./TodosEdit";
+import Error from "./Error";
 
 const Todos = () => {
     return (
@@ -27,6 +28,9 @@ const Todos = () => {
                         </Route>
                         <Route path="/:id/edit" exact>
                             <TodosEdit />
+                        </Route>
+                        <Route>
+                            <Error path="*" error={"Page Not Found"} />
                         </Route>
                     </Switch>
                 </div>
