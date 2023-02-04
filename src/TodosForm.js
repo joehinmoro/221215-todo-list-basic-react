@@ -12,7 +12,6 @@ const TodosForm = ({
     // handle form submit
     const handleSubmit = async (e) => {
         // prevent default submit behaviour
-
         e.preventDefault();
         // validate todo title then create request body
         if (title)
@@ -70,6 +69,7 @@ const TodosForm = ({
                                         className="btn btn-block btn-outline-light h-100"
                                         disabled={disableSubmitButton}
                                     >
+                                        {/* render spinner during create or update request */}
                                         {isPending && (
                                             <span
                                                 class="spinner-border spinner-border-sm me-2"

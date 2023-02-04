@@ -5,6 +5,7 @@ import TodosUpdate from "./TodosUpdate";
 import useFetchGet from "./useFetchGet";
 
 const TodosEdit = () => {
+    // create states
     const [title, setTitle] = useState("");
     const [priority, setPriority] = useState("normal");
     const [payload, setPayload] = useState(null);
@@ -51,7 +52,7 @@ const TodosEdit = () => {
         }
     }, [isPending, error]);
 
-    //
+    // set payload from form data ensuring no redundant field
     useEffect(() => {
         if (formSubmitData) {
             const payload = {};
@@ -62,7 +63,7 @@ const TodosEdit = () => {
         }
     }, [formSubmitData]);
 
-    // if update request is successful
+    // if update request is successful:
     useEffect(() => {
         if (success) {
             // unload payload
@@ -74,6 +75,7 @@ const TodosEdit = () => {
 
     return (
         <div className="container">
+            {/* render form component on load */}
             {errorGET && <div className="container mt-5 text-center">{error}</div>}
             {isPendingGET && <div className="container mt-5 text-center">Loading</div>}
             {todo && (
@@ -84,15 +86,12 @@ const TodosEdit = () => {
                     priority={priority}
                     setPriority={setPriority}
                     isPending={isPending}
-                    setPayload={setPayload}
-                    setIsPending={setIsPending}
-                    error={error}
-                    setError={setError}
                     setFormSubmitData={setFormSubmitData}
                     disableSubmitButton={disableSubmitButton}
                     submitButtonText={submitButtonText}
                 />
             )}
+            {/* if update payload is set, render update component */}
             {payload && (
                 <TodosUpdate
                     payload={payload}

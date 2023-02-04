@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react";
 
 const useFetchGet = (url, options) => {
+    // create states
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
     const [data, setData] = useState(null);
 
     useEffect(() => {
+        // initialize fetch request abort controller
         const abortController = new AbortController();
         const fetchRequest = async () => {
             try {
+                // make fetch request
                 const res = await fetch(url, { signal: abortController.signal, ...options });
                 console.log(options);
                 console.log(res);
+                // throw message on eroor
                 if (!res.ok) throw Error("error fetching resource");
+                // parse data from response and set data state
                 const data = await res.json();
                 setData(data);
             } catch (error) {
+                // handle error
                 console.log(`${error}`);
                 console.log(`${error}\n${error.message}\n${error.name}`);
 
@@ -25,13 +31,15 @@ const useFetchGet = (url, options) => {
                 setIsPending(false);
             }
         };
+
+        // imitate real world request delay
         setTimeout(() => {
             fetchRequest();
         }, 500);
-
+        // abort request if parent component in unmounted during request
         return () => abortController.abort();
     }, [url, options]);
-    // return [data, isPending, error];
+    // return request data and status [data, isPending, error];
     return [isPending, error, data];
 };
 

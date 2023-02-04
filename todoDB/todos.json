@@ -3,14 +3,20 @@
     {
       "title": "finish this project",
       "priority": "normal",
-      "isCompleted": false,
+      "isCompleted": true,
       "id": 1
     },
     {
-      "title": "Start next project",
-      "priority": "normal",
+      "title": "Hire Me!!!",
+      "priority": "high",
       "isCompleted": false,
-      "id": 2
+      "id": 13
+    },
+    {
+      "title": "Hack ChatGPT",
+      "priority": "low",
+      "isCompleted": false,
+      "id": 14
     }
   ]
 }

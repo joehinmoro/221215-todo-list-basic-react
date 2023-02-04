@@ -8,6 +8,7 @@ const Error = ({ error }) => {
                     <h3 className="mt-3 text-danger">Error :(</h3>
                     <h4 className="text-danger">{error}</h4>
                     <h4>
+                        {/* return to root route */}
                         <Link to={"/"}>Return Home</Link>
                     </h4>
                 </div>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const TodosShowContent = ({ todo, handleDelete, handleStatus }) => {
+    // color mode based on todo completed status
     const colorMode = todo.isCompleted ? "danger" : "light";
     console.log(todo);
 

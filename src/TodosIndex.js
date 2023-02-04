@@ -5,33 +5,43 @@ import Loading from "./Loading";
 import Error from "./Error";
 
 const TodosIndex = () => {
+    // todo state
     const [todos, setTodos] = useState(null);
-
+    // get all todos request
     const [isPending, error, GetTodos] = useFetchGet("http://localhost:8080/todos");
 
+    // set todo state from fetched data
     useEffect(() => {
         setTodos(GetTodos);
     }, [GetTodos]);
 
+    // delete todo function
     const handleDelete = async (id) => {
         try {
+            // send delete request
             const res = await fetch(`http://localhost:8080/todos/${id}`, { method: "DELETE" });
+            //    throw message on error
             if (!res.ok) throw Error("Error Deleting...");
             // window.location.reload();
+            // filter out deleted todo from todos state on success
             setTodos(todos.filter((todo) => todo.id !== id));
         } catch (error) {
+            // handle error
             console.log(error.message, error.name);
             alert(error.message, error.name);
         }
     };
 
+    // toggle todo completed status function
     const handleStatus = async (_id, isCompleted) => {
         try {
+            // send update request to toggle status
             const res = await fetch(`http://localhost:8080/todos/${_id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ isCompleted: !isCompleted }),
             });
+            // throw message on error
             if (!res.ok) throw Error("Error Updating...");
             // const newTodos = todos.filter((todo) => todo.id !== id);
 
@@ -40,10 +50,11 @@ const TodosIndex = () => {
             // currTodo[0].isCompleted = !isCompleted;
 
             // setTodos(newTodos.concat(...currTodo));
-
+            // toggle todo completed status in todos state on success
             todos[todos.indexOf(todos.find(({ id }) => id === _id))].isCompleted = !isCompleted;
             setTodos([...todos]);
         } catch (error) {
+            // handle error
             console.log(error.message, error.name);
             alert(error.message, error.name);
         }
@@ -51,6 +62,7 @@ const TodosIndex = () => {
 
     return (
         <div>
+            {/* render all todos */}
             {error && <Error error={error} />}
             {isPending && <Loading />}
             {todos && (

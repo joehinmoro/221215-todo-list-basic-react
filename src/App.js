@@ -1,11 +1,7 @@
 import Todos from "./Todos";
 
 const App = () => {
-    return (
-        <div>
-            <Todos />
-        </div>
-    );
+    return <Todos />;
 };
 
 export default App;
