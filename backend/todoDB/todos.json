@@ -1,0 +1,22 @@
+{
+  "todos": [
+    {
+      "title": "finish this project",
+      "priority": "normal",
+      "isCompleted": true,
+      "id": 1
+    },
+    {
+      "title": "Hire Me!!!",
+      "priority": "high",
+      "isCompleted": false,
+      "id": 13
+    },
+    {
+      "title": "Hack ChatGPT",
+      "priority": "low",
+      "isCompleted": false,
+      "id": 14
+    }
+  ]
+}
