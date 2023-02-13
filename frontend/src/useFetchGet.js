@@ -32,10 +32,8 @@ const useFetchGet = (url, options) => {
             }
         };
 
-        // imitate real world request delay
-        setTimeout(() => {
-            fetchRequest();
-        }, 500);
+        fetchRequest();
+
         // abort request if parent component in unmounted during request
         return () => abortController.abort();
     }, [url, options]);

@@ -8,7 +8,7 @@ const TodosIndex = () => {
     // todo state
     const [todos, setTodos] = useState(null);
     // get all todos request
-    const [isPending, error, GetTodos] = useFetchGet("http://localhost:8080/todos");
+    const [isPending, error, GetTodos] = useFetchGet("/api/todos");
 
     // set todo state from fetched data
     useEffect(() => {
@@ -19,12 +19,12 @@ const TodosIndex = () => {
     const handleDelete = async (id) => {
         try {
             // send delete request
-            const res = await fetch(`http://localhost:8080/todos/${id}`, { method: "DELETE" });
+            const res = await fetch(`/api/todos/${id}`, { method: "DELETE" });
             //    throw message on error
             if (!res.ok) throw Error("Error Deleting...");
             // window.location.reload();
             // filter out deleted todo from todos state on success
-            setTodos(todos.filter((todo) => todo.id !== id));
+            setTodos(todos.filter(({ _id }) => _id !== id));
         } catch (error) {
             // handle error
             console.log(error.message, error.name);
@@ -33,10 +33,10 @@ const TodosIndex = () => {
     };
 
     // toggle todo completed status function
-    const handleStatus = async (_id, isCompleted) => {
+    const handleStatus = async (id, isCompleted) => {
         try {
             // send update request to toggle status
-            const res = await fetch(`http://localhost:8080/todos/${_id}`, {
+            const res = await fetch(`/api/todos/${id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ isCompleted: !isCompleted }),
@@ -51,7 +51,7 @@ const TodosIndex = () => {
 
             // setTodos(newTodos.concat(...currTodo));
             // toggle todo completed status in todos state on success
-            todos[todos.indexOf(todos.find(({ id }) => id === _id))].isCompleted = !isCompleted;
+            todos[todos.indexOf(todos.find(({ _id }) => _id === id))].isCompleted = !isCompleted;
             setTodos([...todos]);
         } catch (error) {
             // handle error

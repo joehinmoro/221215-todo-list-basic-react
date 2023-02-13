@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import Error from "./Error";
+import Loading from "./Loading";
 import TodosForm from "./TodosForm";
 import TodosUpdate from "./TodosUpdate";
 import useFetchGet from "./useFetchGet";
@@ -20,7 +22,7 @@ const TodosEdit = () => {
     // extract todo id from url params
     const { id } = useParams();
     // fetch todo record using params
-    const [isPendingGET, errorGET, todo] = useFetchGet(`http://localhost:8080/todos/${id}`);
+    const [isPendingGET, errorGET, todo] = useFetchGet(`/api/todos/${id}`);
     // set update form fields to current todos data
     useEffect(() => {
         if (todo) {
@@ -76,8 +78,8 @@ const TodosEdit = () => {
     return (
         <div className="container">
             {/* render form component on load */}
-            {errorGET && <div className="container mt-5 text-center">{error}</div>}
-            {isPendingGET && <div className="container mt-5 text-center">Loading</div>}
+            {errorGET && <Error error={"Something went wrong"} />}
+            {isPendingGET && <Loading />}
             {todo && (
                 <TodosForm
                     header={"Edit Todo"}

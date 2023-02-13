@@ -1,5 +1,6 @@
 // IMPORTS
-const router = require("express").Router;
+const router = require("express").Router();
+const { getTodos, getTodo, createTodo, updateTodo, deleteTodo } = require("./controllers");
 
 // ROUTES
 // index

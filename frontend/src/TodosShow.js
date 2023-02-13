@@ -18,7 +18,7 @@ const TodosShow = () => {
     const handleDelete = async (id) => {
         try {
             // make delete request
-            const res = await fetch(`http://localhost:8080/todos/${id}`, { method: "DELETE" });
+            const res = await fetch(`/api/todos/${id}`, { method: "DELETE" });
             // throw message on error
             if (!res.ok) throw Error("Error Deleting...");
             // redirect to index on success
@@ -34,7 +34,7 @@ const TodosShow = () => {
     const handleStatus = async (id, isCompleted) => {
         try {
             // make request to toggle sompleted status
-            const res = await fetch(`http://localhost:8080/todos/${id}`, {
+            const res = await fetch(`/api/todos/${id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ isCompleted: !isCompleted }),
@@ -52,7 +52,7 @@ const TodosShow = () => {
     };
 
     // fetch todo using id from url
-    const [isPending, error, getTodo] = useFetchGet(`http://localhost:8080/todos/${id}`);
+    const [isPending, error, getTodo] = useFetchGet(`/api/todos/${id}`);
 
     // set todo state using data from todo get fetch request
     useEffect(() => {

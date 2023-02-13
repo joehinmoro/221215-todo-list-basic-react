@@ -10,9 +10,9 @@ const TodosIndexContent = ({ todos, title, handleDelete, handleStatus }) => {
                         {todos.map((todo) => {
                             return (
                                 <Link
-                                    to={`/${todo.id}`}
+                                    to={`/${todo._id}`}
                                     // onClick={() => handleTodosDelete(todo.id)}
-                                    key={todo.id}
+                                    key={todo._id}
                                     className={`list-group-item list-group-item-action ${
                                         todo.isCompleted && "list-group-item-danger"
                                     }`}
@@ -30,7 +30,7 @@ const TodosIndexContent = ({ todos, title, handleDelete, handleStatus }) => {
                                                 onClick={async (e) => {
                                                     e.preventDefault();
                                                     const status = await handleStatus(
-                                                        todo.id,
+                                                        todo._id,
                                                         todo.isCompleted
                                                     );
                                                     console.log(status);
@@ -41,7 +41,7 @@ const TodosIndexContent = ({ todos, title, handleDelete, handleStatus }) => {
                                             </button>
                                             <button
                                                 onClick={(e) => {
-                                                    handleDelete(todo.id);
+                                                    handleDelete(todo._id);
                                                     // e.stopPropagation();
                                                     e.preventDefault();
                                                 }}

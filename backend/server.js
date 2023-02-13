@@ -4,6 +4,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const { DB_URI, PORT, HOST } = process.env;
+// routes
+const todosRoute = require("./routes");
 
 // MAIN
 // App Instance and Settings
@@ -14,7 +16,15 @@ const app = express();
 app.use(express.json());
 
 // Routes
-// root
+app.all("/", (req, res) => {
+    res.redirect("/api/todos");
+});
+// "/todos" (todos)
+app.use("/api/todos", todosRoute);
+// 404 (not found)
+app.use((req, res) => {
+    res.status(404).json({ error: { code: 404, message: "not found" } });
+});
 
 // connect to db then listen for request
 mongoose.set("strictQuery", false);

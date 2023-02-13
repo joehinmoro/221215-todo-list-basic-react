@@ -32,10 +32,8 @@ const useFetchPost = (url, payload, method) => {
                 setIsPending(false);
             }
         };
-        // simulate real world request delay
-        setTimeout(() => {
-            handleFetch();
-        }, 500);
+
+        handleFetch();
     }, [url, payload, method]);
 
     // return request status

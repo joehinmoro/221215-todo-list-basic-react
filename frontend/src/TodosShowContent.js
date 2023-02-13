@@ -23,19 +23,19 @@ const TodosShowContent = ({ todo, handleDelete, handleStatus }) => {
                             className={`card-footer border-${colorMode}-subtle bg-dark-subtle d-flex  justify-content-around`}
                         >
                             <button
-                                onClick={(e) => handleStatus(todo.id, todo.isCompleted)}
+                                onClick={(e) => handleStatus(todo._id, todo.isCompleted)}
                                 className={`btn btn-outline-${colorMode}`}
                             >
                                 {todo.isCompleted ? "Undo" : "Done"}
                             </button>
                             <Link
-                                to={`/${todo.id}/edit`}
+                                to={`/${todo._id}/edit`}
                                 className={`btn btn-outline-${colorMode}`}
                             >
                                 Edit
                             </Link>
                             <button
-                                onClick={(e) => handleDelete(todo.id)}
+                                onClick={(e) => handleDelete(todo._id)}
                                 className={`btn btn-outline-${colorMode}`}
                             >
                                 Delete
